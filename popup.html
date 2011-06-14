@@ -2,40 +2,66 @@
 <script type="text/javascript" src="2.2.0-crypto-min.js"></script>
 <script type="text/javascript" src="2.2.0-hmac-min.js"></script>
 <script type="text/javascript">
+var $ = function(id) {
+  return document.getElementById(id);
+}
+
 var getDefaultSiteKey = function() {
   chrome.tabs.getSelected(null, function(tab){
     reg=/:\/\/\w+\.(\w+)/;
     res=reg.exec(tab.url);
     if (res.length >= 2) {
-      document.f.site.value=res[1];
-      document.f.onsubmit();
+      $('site_key').value=res[1];
+      if ($('master_key').value) {
+        onSubmitSiteKey();
+      }
     }
   });
 }
 
 var onSubmitSiteKey = function() {
-  var site = document.f.site.value;
-  var master = window.localStorage.getItem("master_key");
+  var site = $('site_key').value;
+  var master = $('master_key').value;
+  console.log(site);
+  console.log(master);
   var hmac = Crypto.util.bytesToBase64(Crypto.HMAC(Crypto.MD5, site, master, {asBytes:true}));
   hmac = hmac.replace(/=+$/,'').replace(/\+|\//g,'').substring(0, 20);
-  document.f.outputkey.value=hmac;
-  document.f.outputkey.select();
+  $('output_key').value=hmac;
+  $('output_key').focus();
+  $('output_key').select();
 }
+
+var setFocus = function() {
+  if ($('master_key').value) {
+    $('site_key').focus();
+  } else {
+    $('master_key').focus();
+  }
+}
+
 </script>
 
 <style type='text/css'>
 div.prompt {
-  width:50px;
+  width:70px;
   display:inline-block;
 }
 </style>
 
-<body onload="getDefaultSiteKey();document.f.site.focus();" style='min-width:260px'>
+<body onload="getDefaultSiteKey();setFocus();" style='min-width:280px'>
 <form name="f" onsubmit='onSubmitSiteKey();return false;';action=''>
-<div class='prompt'>site key</div>
-<input type='text' name='site' id='sitekey'/>
+<div>
+<div class='prompt'>masterkey</div>
+<input type='password' id='master_key'/>
+</div>
+<div>
+<div class='prompt'>sitekey</div>
+<input type='text' id='site_key' />
 <input type='submit'/>
+</div>
+<div>
 <div class='prompt'>output</div>
-<input type='text' name='outputkey' readonly>
+<input type='text' id='output_key' readonly>
+</div>
 </form>
 </body>
