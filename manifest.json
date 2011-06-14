@@ -1,0 +1,11 @@
+{
+  "name": "One Password",
+  "version": "1.0",
+  "description": "genearte  HMAC mix of your master key and a sitekey.",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "permissions": ["tabs"]
+}

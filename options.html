@@ -1,0 +1,29 @@
+<script type="text/javascript" src="2.2.0-crypto-min.js"></script>
+<script>
+var submitOptions = function() {
+  window.localStorage.removeItem('master_key');
+  window.localStorage.setItem('master_key', document.f.master_key.value);
+}
+
+var generateMasterKey = function() {
+  var s = [];
+  for (var i=0; i < 20; ++i) {
+    s[i]=parseInt(Math.random()*255);
+  }
+  document.f.master_key.value=Crypto.util.bytesToBase64(s).replace(/=+$/,'').replace(/\+|\//g,'').substring(0, 16);
+  console.log(s);
+}
+</script>
+
+<body onload="document.f.master_key.value=window.localStorage.getItem('master_key');">
+<form name='f' onsubmit='submitOptions(); return false;' action=''>
+<div>
+Master Key:
+<input type='text' name="master_key"/>
+</div>
+<div>
+<input type='submit' value='Update'/>
+<input type='button' value='Generate' onclick='generateMasterKey();return false;'/>
+</div>
+</form>
+</body>

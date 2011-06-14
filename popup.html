@@ -1,0 +1,41 @@
+<script type="text/javascript" src="2.2.0-crypto-md5.js"></script>
+<script type="text/javascript" src="2.2.0-crypto-min.js"></script>
+<script type="text/javascript" src="2.2.0-hmac-min.js"></script>
+<script type="text/javascript">
+var getDefaultSiteKey = function() {
+  chrome.tabs.getSelected(null, function(tab){
+    reg=/:\/\/\w+\.(\w+)/;
+    res=reg.exec(tab.url);
+    if (res.length >= 2) {
+      document.f.site.value=res[1];
+      document.f.onsubmit();
+    }
+  });
+}
+
+var onSubmitSiteKey = function() {
+  var site = document.f.site.value;
+  var master = window.localStorage.getItem("master_key");
+  var hmac = Crypto.util.bytesToBase64(Crypto.HMAC(Crypto.MD5, site, master, {asBytes:true}));
+  hmac = hmac.replace(/=+$/,'').replace(/\+|\//g,'').substring(0, 20);
+  document.f.outputkey.value=hmac;
+  document.f.outputkey.select();
+}
+</script>
+
+<style type='text/css'>
+div.prompt {
+  width:50px;
+  display:inline-block;
+}
+</style>
+
+<body onload="getDefaultSiteKey();document.f.site.focus();" style='min-width:260px'>
+<form name="f" onsubmit='onSubmitSiteKey();return false;';action=''>
+<div class='prompt'>site key</div>
+<input type='text' name='site' id='sitekey'/>
+<input type='submit'/>
+<div class='prompt'>output</div>
+<input type='text' name='outputkey' readonly>
+</form>
+</body>
