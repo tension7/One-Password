@@ -6,25 +6,38 @@
 <style type='text/css'>
 div.prompt {
   width:70px;
+  padding-left:10px;
+  padding-right:5px;
   display:inline-block;
   text-align:right;
+  font-size:14pt;
 }
+input.box {
+  width:140px;
+  padding-right:20px;
+  border:0;
+  border-bottom:red solid 2px;
+  outline:0;
+  font-size:12pt;
+}
+
 </style>
 
-<body onload="getDefaultSiteKey();setFocus();" style='min-width:280px'>
+<body onload="getDefaultSiteKey();setFocus();" style='min-width:245px;'>
 <form name="f" onsubmit='onSubmitSiteKey();return false;';action=''>
 <div>
 <div class='prompt'>masterkey</div>
-<input type='password' id='master_key'/>
+<input class='box' type='password' id='master_key'/>
 </div>
 <div>
 <div class='prompt'>sitekey</div>
-<input type='text' id='site_key' />
-<input type='submit'/>
+<input class='box' type='text' id='site_key' />
 </div>
 <div>
-<div class='prompt'>output</div>
-<input type='text' id='output_key' readonly>
+<div class='prompt'>
+<input type='submit' value='>>'/>
+</div>
+<input class='box' type='text' id='output_key' readonly>
 </div>
 </form>
 </body>
