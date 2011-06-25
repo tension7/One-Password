@@ -3,6 +3,10 @@ var $ = function(id) {
 }
 
 var getDefaultSiteKey = function() {
+  if (!chrome || !chrome.tabs) {
+    //not in extension mode
+    return;
+  }
   chrome.tabs.getSelected(null, function(tab){
     reg=/:\/\/\w+\.(\w+)/;
     res=reg.exec(tab.url);
@@ -18,8 +22,6 @@ var getDefaultSiteKey = function() {
 var onSubmitSiteKey = function() {
   var site = $('site_key').value;
   var master = $('master_key').value;
-  console.log(site);
-  console.log(master);
   var hmac = Crypto.util.bytesToBase64(Crypto.HMAC(Crypto.MD5, site, master, {asBytes:true}));
   hmac = hmac.replace(/=+$/,'').replace(/\+|\//g,'').substring(0, 20);
   $('output_key').value=hmac;
