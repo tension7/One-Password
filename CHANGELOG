@@ -1,0 +1,4 @@
+v1.1
+1. Better sitekey parsing from the URL.
+2. Remembers your sitekey changes.
+
