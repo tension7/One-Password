@@ -53,6 +53,6 @@ setFocus : function() {
   } else {
     $('master_key').focus();
   }
-},
+}
 
 } // end of app
