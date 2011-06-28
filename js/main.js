@@ -4,7 +4,7 @@ var $ = function(id) {
 
 var App = {
 
-'getDefaultSiteKey' : function() {
+getDefaultSiteKey : function() {
   if (!chrome || !chrome.tabs) {
     //not in extension mode
     return;
@@ -16,6 +16,7 @@ var App = {
     }
     var domain = tab.url.match(/^[\w-]+:\/*\[?([\w\.:-]+)\]?(?::\d+)?/)[1];
     var sitekey = window.localStorage.getItem(domain);
+    var len = window.localStorage.getItem(domain + ":length");
     if (!sitekey) {
       var tokens = domain.split('.');
       var topLevelDomain = /com|edu|gov|net|org|info/;
@@ -25,32 +26,43 @@ var App = {
         sitekey = tokens[1];
       }
     }
+    if (!len) {
+      len = 20;
+    }
     x.domain = domain;
     x.sitekey = sitekey;
+    x.output_length = len;
     $('site_key').value = sitekey;
+    $('output_length').value = len;
     if ($('master_key').value) {
-      onSubmitSiteKey();
+      onSubmitSiteKey(true);
     }
   });
 },
 
-'onSubmitSiteKey' : function() {
+onSubmitSiteKey : function(focus) {
   var site = $('site_key').value;
   var master = $('master_key').value;
+  var len = $('output_length').value;
   var hmac = Crypto.util.bytesToBase64(Crypto.HMAC(Crypto.MD5, site, master, {asBytes:true}));
-  hmac = hmac.replace(/=+$/,'').replace(/\+|\//g,'').substring(0, 20);
-  $('output_key').value=hmac;
-  $('output_key').focus();
+  this.hmac = hmac.replace(/=+$/,'').replace(/\+|\//g,'');
+  $('output_key').value=this.hmac.substring(0, len);
 
   agent = navigator.userAgent;
   if (!!agent.match(/iPhone/i)) {
     $('output_key').readOnly=false;
   } else {
-    $('output_key').select();
+    if (focus) {
+      $('output_key').focus();
+      $('output_key').select();
+    }
   }
 
   if (site && site != this.sitekey) {
     window.localStorage.setItem(this.domain, site);
+  }
+  if (len && len != this.output_length) {
+    window.localStorage.setItem(this.domain+":length", len);
   }
 },
 
@@ -59,6 +71,12 @@ setFocus : function() {
     $('site_key').focus();
   } else {
     $('master_key').focus();
+  }
+},
+
+onLengthChange : function() {
+  if (this.hmac) {
+    this.onSubmitSiteKey(false);
   }
 }
 
