@@ -41,7 +41,14 @@ var App = {
   hmac = hmac.replace(/=+$/,'').replace(/\+|\//g,'').substring(0, 20);
   $('output_key').value=hmac;
   $('output_key').focus();
-  $('output_key').select();
+
+  agent = navigator.userAgent;
+  if (!!agent.match(/iPhone/i)) {
+    $('output_key').readOnly=false;
+  } else {
+    $('output_key').select();
+  }
+
   if (site && site != this.sitekey) {
     window.localStorage.setItem(this.domain, site);
   }
