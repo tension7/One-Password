@@ -46,8 +46,8 @@ onSubmitSiteKey : function(focus) {
   var len = $('output_length').value;
   var hmac = Crypto.util.bytesToBase64(Crypto.HMAC(Crypto.MD5, site, master, {asBytes:true}));
   this.hmac = hmac.replace(/=+$/,'').replace(/\+|\//g,'');
-  $('output_key').value=this.hmac.substring(0, len);
-
+  var key = this.hmac.substring(0, len);
+  $('output_key').value = key;
   agent = navigator.userAgent;
   if (!!agent.match(/iPhone/i)) {
     $('output_key').readOnly=false;
@@ -56,6 +56,12 @@ onSubmitSiteKey : function(focus) {
       $('output_key').focus();
       $('output_key').select();
     }
+  }
+
+  if (chrome && chrome.tabs) {
+    chrome.tabs.executeScript(null, {
+      code:'if(document.forms){for(var f=0;f<document.forms.length;++f){var form=document.forms[f];var pwdInput=null;for(var i=0;i<form.length;++i){if(form[i].type=="password"){pwdInput=form[i];break;}}if(pwdInput){pwdInput.value="'+key+'";}}}'
+    });
   }
 
   if (site && site != this.sitekey) {
