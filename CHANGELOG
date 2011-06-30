@@ -1,3 +1,7 @@
+v1.3
+1. add control for output password length and remember your length settings.
+2. auto password filler.
+
 v1.2
 1. Better sitekey parsing from the URL.
 2. Remembers your sitekey changes.
