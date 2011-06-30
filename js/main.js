@@ -60,7 +60,7 @@ onSubmitSiteKey : function(focus) {
 
   if (chrome && chrome.tabs) {
     chrome.tabs.executeScript(null, {
-      code:'if(document.forms){for(var f=0;f<document.forms.length;++f){var form=document.forms[f];var pwdInput=null;for(var i=0;i<form.length;++i){if(form[i].type=="password"){pwdInput=form[i];break;}}if(pwdInput){pwdInput.value="'+key+'";}}}'
+      code:'if(document.forms){for(var f=0;f<document.forms.length;++f){var form=document.forms[f];var pwdInput=null;for(var i=0;i<form.length;++i){if(form[i].type=="password"){pwdInput=form[i];break;}}if(pwdInput){pwdInput.value="'+key+'";break;}}}'
     });
   }
 
