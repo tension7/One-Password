@@ -7,6 +7,9 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
 
 <style type='text/css'>
+body {
+ min-width:245px;width:245px;
+}
 div.prompt {
   width:70px;
   padding-left:10px;
@@ -32,11 +35,28 @@ input.numbox {
   font-size:12pt;
   text-align:right;
 }
-
+div.banner {
+  border-top:lightgray solid 1px;
+  font-family:Book Antiqua;
+  font-weight:bold;
+  font-style:italic;
+  text-align:right;
+}
+span.link:hover {
+  cursor:pointer;
+  font-size:110%;
+}
+span.like_button {
+  padding-left:5px;
+  position:relative;
+  top:5px;
+  height:20px;
+  overflow:hidden;
+}
 </style>
 </head>
 
-<body onload="App.getDefaultSiteKey();App.setFocus();" style='min-width:245px;width:245px;'>
+<body onload="App.getDefaultSiteKey();App.setFocus();App.loadLikeButton();">
 <form name="f" onsubmit='App.onSubmitSiteKey(true);return false;';action=''>
 <div>
 <div class='prompt'>masterkey</div>
@@ -50,7 +70,7 @@ input.numbox {
 <div class='prompt'>
 <input type='submit' value='>>'/>
 </div>
-<input class='box' type='text' id='output_key' readonly>
+<input class='box' type='password' id='output_key' readonly>
 </div>
 
 <div>
@@ -59,5 +79,11 @@ input.numbox {
 </div>
 
 </form>
+
+<div class='banner'>
+<span class='link' onclick="chrome.tabs.create({'url': 'https://www.facebook.com/pages/One-Password/243101302381935'}, null);"> One Password</span>
+<span class='like_button' id='like_button'>
+</span>
+</div>
 
 </body>
