@@ -19,11 +19,16 @@ getDefaultSiteKey : function() {
     var len = window.localStorage.getItem(domain + ":length");
     if (!sitekey) {
       var tokens = domain.split('.');
-      var topLevelDomain = /com|edu|gov|net|org|info/;
-      if (tokens.length <= 2 || tokens[1].match(topLevelDomain)) {
-        sitekey = tokens[0];
-      } else {
-        sitekey = tokens[1];
+      var topLevelDomain = /aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|xxx/;
+      for (var i = tokens.length - 1; i >= 1; i = i - 1) {
+        if (tokens[i].match(topLevelDomain)) {
+          sitekey = tokens[i-1];
+          break;
+        }
+      }
+      if (!sitekey) {
+        if (tokens.length <= 2) { sitekey = tokens[0]; }
+        else { sitekey = tokens[1]; }
       }
     }
     if (!len) {
