@@ -10,7 +10,7 @@ from google.appengine.ext.webapp import util
 
 class MainPage(webapp.RequestHandler):
   def get(self):
-    templatePath = os.path.join(os.path.dirname(__file__), "popup.html")
+    templatePath = os.path.join(os.path.dirname(__file__), "main.html")
     self.response.out.write(template.render(templatePath, {}))
     
 application = webapp.WSGIApplication(

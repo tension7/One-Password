@@ -1,0 +1,88 @@
+<head>
+<script type="text/javascript" src="/js/2.2.0-crypto-md5.js"></script>
+<script type="text/javascript" src="/js/2.2.0-crypto-min.js"></script>
+<script type="text/javascript" src="/js/2.2.0-hmac-min.js"></script>
+<script type="text/javascript" src="/js/main_mini.js"></script>
+
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+<style type='text/css'>
+body {
+ min-width:245px;width:250px;
+}
+div.prompt {
+  width:100px;
+  padding-right:3px;
+  display:inline-block;
+  text-align:right;
+  font-size:14pt;
+}
+input.box {
+  width:140px;
+  padding-right:20px;
+  border:0;
+  border-bottom:darkgray solid 2px;
+  outline:0;
+  font-size:12pt;
+}
+input.numbox {
+  width:80px;
+  padding-right:20px;
+  border:0;
+  border-bottom:darkgray solid 2px;
+  outline:0;
+  font-size:12pt;
+  text-align:right;
+}
+div.banner {
+  border-top:lightgray solid 1px;
+  font-family:Book Antiqua;
+  font-weight:bold;
+  font-style:italic;
+  text-align:right;
+}
+span.link:hover {
+  cursor:pointer;
+  font-size:110%;
+}
+span.like_button {
+  padding-left:5px;
+  position:relative;
+  top:5px;
+  height:20px;
+  overflow:hidden;
+}
+</style>
+</head>
+
+<body onload="App.getDefaultSiteKey();App.setFocus();App.loadLikeButton();">
+<form name="f" onsubmit='App.onSubmitSiteKey(true);return false;';action=''>
+<div>
+<div class='prompt'>master key</div>
+<input class='box' type='password' id='master_key'/>
+</div>
+<div>
+<div class='prompt'>site key</div>
+<input class='box' type='text' id='site_key' />
+</div>
+<div>
+<div class='prompt'>
+<input type='submit' value='>>'/>
+</div>
+<input class='box' type='text' id='output_key'>
+</div>
+
+<div>
+<div class='prompt'>length</div>
+<input class='numbox' type='number' id='output_length' min='1' max='20' value='20' onclick='App.onLengthChange();'/>
+</div>
+
+</form>
+
+<div class='banner'>
+<span class='link' onclick="chrome.tabs.create({'url': 'https://www.facebook.com/pages/One-Password/243101302381935'}, null);"> One Password</span>
+<span class='like_button' id='like_button'>
+</span>
+</div>
+
+</body>
