@@ -1,7 +1,7 @@
 {
-  "name": "One Password",
-  "version": "1.4",
-  "description": "You only need to remember one password, your master key. One Password will generate passwords on different websites for you.",
+  "name": "123 Password",
+  "version": "1.5",
+  "description": "You only need to remember one password, your master key. 123 Password will generate passwords on different websites for you.",
   "browser_action": {
     "default_icon": "icon.png",
     "popup": "popup.html"
