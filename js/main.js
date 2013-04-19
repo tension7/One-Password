@@ -97,3 +97,15 @@ loadLikeButton : function() {
 }
 
 } // end of app
+
+document.addEventListener('DOMContentLoaded', function () {
+  App.getDefaultSiteKey();
+  App.setFocus();
+  App.loadLikeButton();
+  f = document.forms[0];
+  f.addEventListener('submit', function(evt) {
+      App.onSubmitSiteKey(true);
+      evt.preventDefault();
+    });
+})
+
