@@ -92,8 +92,6 @@ onLengthChange : function() {
 },
 
 loadLikeButton : function() {
-  $('like_button').innerHTML =
-'<iframe src="http://www.facebook.com/plugins/like.php?app_id=248233821858017&amp;href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FOne-Password%2F243101302381935&amp;send=false&amp;layout=button_count&amp;width=50&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:50px; height:21px;" allowTransparency="true"></iframe>';
 }
 
 } // end of app
