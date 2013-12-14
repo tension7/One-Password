@@ -4,7 +4,7 @@
 <script type="text/javascript" src="/js/2.2.0-hmac-min.js"></script>
 <script type="text/javascript" src="/js/main_mini.js"></script>
 
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 
 <style type='text/css'>
 body {
@@ -74,13 +74,13 @@ span.like_button {
 
 <div>
 <div class='prompt'>length</div>
-<input class='numbox' type='number' id='output_length' min='1' max='20' value='20' onclick='App.onLengthChange();'/>
+<input class='numbox' type='number' id='output_length' min='1' max='20' value='20'/>
 </div>
 
 </form>
 
 <div class='banner'>
-<span class='link' onclick="chrome.tabs.create({'url': 'https://www.facebook.com/pages/One-Password/243101302381935'}, null);"> 123 Password</span>
+<span class='link' id='page_link'> 123 Password</span>
 </div>
 
 </body>

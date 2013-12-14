@@ -65,7 +65,7 @@ onSubmitSiteKey : function(focus) {
 
   if (typeof chrome !== "undefined" && chrome.tabs) {
     chrome.tabs.executeScript(null, {
-      code:'if(document.forms){for(var f=0;f<document.forms.length;++f){var form=document.forms[f];var pwdInput=null;for(var i=0;i<form.length;++i){if(form[i].type=="password"){pwdInput=form[i];break;}}if(pwdInput){pwdInput.value="'+key+'";break;}}}'
+      code:'var ae=document.activeElement;if(ae.tagName && ae.tagName.toLowerCase()=="input" && ae.type && ae.type.toLowerCase()=="password"){ae.value="'+key+'";} else if(document.forms){for(var f=0;f<document.forms.length;++f){var form=document.forms[f];var pwdInput=null;for(var i=0;i<form.length;++i){if(form[i].type=="password"){pwdInput=form[i];break;}}if(pwdInput){pwdInput.value="'+key+'";break;}}}'
     });
   }
 
@@ -92,6 +92,10 @@ onLengthChange : function() {
 },
 
 loadLikeButton : function() {
+},
+
+onPageLinkClick : function() {
+  chrome.tabs.create({'url': 'https://www.facebook.com/pages/One-Password/243101302381935'}, null);
 }
 
 } // end of app
@@ -104,6 +108,12 @@ document.addEventListener('DOMContentLoaded', function () {
   f.addEventListener('submit', function(evt) {
       App.onSubmitSiteKey(true);
       evt.preventDefault();
+    });
+  $('output_length').addEventListener('click', function(evt) {
+      App.onLengthChange();
+    });
+  $('page_link').addEventListener('click', function(evt) {
+      App.onPageLinkClick();
     });
 })
 
