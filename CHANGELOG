@@ -1,3 +1,11 @@
+v1.7
+A bunch of fixes and good features! Hope you enjoy!
+1. Fixed the bug that for some websites auto-password-fill was not working.
+2. Fixed the bug that 123Password link didn't work.
+3. Fixed the bug that Length field change didn't auto update result field.
+4. Auto-password-fill now first try to fill the current input field that's in focus.
+5. Adding weak master password warning (for key with less than 40-bit entropy).
+
 v1.5
 Change name because f@!king 1Password is going to sue me for trademark infringing!
 
