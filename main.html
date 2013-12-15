@@ -10,6 +10,16 @@
 body {
  min-width:245px;width:250px;
 }
+form {
+  margin-bottom:4px;
+}
+div.warning {
+  padding-left:10px;
+  margin-bottom:8px;
+  font-size:12pt;
+  color:red;
+  visibility:hidden;
+}
 div.prompt {
   width:100px;
   padding-right:3px;
@@ -79,6 +89,7 @@ span.like_button {
 
 </form>
 
+<div class='warning' id='warning'> <img src='warning.png'/> Master key is not strong enough.</div>
 <div class='banner'>
 <span class='link' id='page_link'> 123 Password</span>
 </div>

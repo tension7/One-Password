@@ -73,7 +73,23 @@ onSubmitSiteKey : function(focus) {
     window.localStorage.setItem(this.domain, site);
   }
   if (len && len != this.output_length) {
-    window.localStorage.setItem(this.domain+":length", len);
+    window.localStorage.setItem(this.domain+':length', len);
+  }
+
+  // password strength test
+  var cset = 1;
+  if (master.search(/\d/)>=0) { cset += 10; }
+  if (master.search(/[A-Z]/)>=0) { cset += 26; }
+  if (master.search(/[a-z]/)>=0) { cset += 26; }
+  if (!master.match(/[A-Za-z0-9]/)) { cset += 10; }
+  var d = Math.log(cset) * master.length / Math.log(2);
+  if (d < 40) {
+    console.log('show');
+    console.log($('warning'));
+    $('warning').style.visibility = 'visible';
+  } else {
+    console.log('hide');
+    $('warning').style.visibility = 'hidden';
   }
 },
 
